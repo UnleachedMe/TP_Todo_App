@@ -1,5 +1,65 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using GitDemoToDoApp.Enums
+@model GitDemoToDoApp.ViewModels.HomeVM
+
 @{
+    var theme = Model.Theme;
+    var bodyClass = theme == "dark" ? "dark-mode" : "";
 }
+
+<h2>Bonjour @Model.Username</h2>
+<p>Dernière déconnexion : @Model.LastLogout</p>
+<h4 class="text-center">Liste des Todos</h4>
+
+<body class="@(Model.Theme == "dark" ? "dark-mode" : "")">
+    <div class="container mt-3">
+        <div class="text-end mb-3">
+            <button asp-controller="Theme" asp-action="Switch" class="btn btn-secondary" onclick="switchTheme()">
+                Changer thème
+            </button>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>DueDate</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var todo in Model.Todos)
+                {
+                    var overdue = todo.DueDate < DateTime.Now && todo.Status != ToDoStatus.Completed;
+                    <tr>
+                        <td>
+                            @(todo.Status == ToDoStatus.Completed ? Html.Raw($"<s>{todo.Title}</s>") : todo.Title)
+                        </td>
+                        <td>@todo.Description</td>
+                        <td>@todo.Status</td>
+                        <td>@todo.DueDate.ToString("yyyy-MM-dd")</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@todo.Id">✏️</a>
+                            <a asp-action="Delete" asp-route-id="@todo.Id" onclick="return confirm('Confirmer la suppression ?');">🗑️</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div>
+            <a class="btn btn-primary" asp-controller="Home" asp-action="Create">+ Ajouter un Todo</a>
+        </div>
+    </div>
+    <script>
+        function switchTheme() {
+            //document.cookie = "Theme=" + (document.body.classList.contains("dark-mode") ? "light" : "dark");
+            //location.reload();
+            const body = document.body;
+            body.classList.toggle("dark-mode");
+            const theme = body.classList.contains("dark-mode") ? "dark" : "light";
+            document.cookie = "Theme=" + theme + "; path=/; max-age=31536000";
+        }
+    </script>
+</body>

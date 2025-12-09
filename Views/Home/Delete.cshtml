@@ -1,5 +1,15 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model GitDemoToDoApp.Models.TodoItem
+@using GitDemoToDoApp.Models
+
+<h2>Supprimer un Todo</h2>
+
+<div class="alert alert-warning">
+    <p>Voulez-vous vraiment supprimer ce Todo ?</p>
+    <p><strong>@Model.Title</strong></p>
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Supprimer</button>
+    <a asp-action="Index" class="btn btn-secondary">Annuler</a>
+</form>
