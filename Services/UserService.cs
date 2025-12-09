@@ -43,10 +43,5 @@ namespace GitDemoToDoApp.Services
             }
         }
 
-        User? IUserService.Authenticate(string username, string password)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }

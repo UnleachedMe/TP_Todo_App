@@ -1,6 +1,7 @@
 using GitDemoToDoApp.Data;
-using Microsoft.EntityFrameworkCore;
+using GitDemoToDoApp.Repositories;
 using GitDemoToDoApp.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,8 +19,13 @@ builder.Services.AddSession();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseInMemoryDatabase("TodoDb"));
 
-// Services
+// Services d'authentification
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+// Services des todos
+builder.Services.AddScoped<ITodoService, TodoService>();
+builder.Services.AddScoped<ITodoRepository, TodoRepository>();
 
 
 var app = builder.Build();
