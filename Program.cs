@@ -1,9 +1,6 @@
 using GitDemoToDoApp.Data;
 using Microsoft.EntityFrameworkCore;
-
-using GitDemoToDoApp.Data;
 using GitDemoToDoApp.Services;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 

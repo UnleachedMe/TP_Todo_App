@@ -1,6 +1,5 @@
 ﻿using GitDemoToDoApp.Data;
 using GitDemoToDoApp.Models;
-using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -15,10 +14,10 @@ namespace GitDemoToDoApp.Services
             _context = context;
         }
 
-        public async Task<User?> Authenticate(string username, string password)
+        public User? Authenticate(string username, string password)
         {
             // On cherche l'utilisateur par son nom
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            var user = _context.Users.FirstOrDefault(u => u.Username == username);
 
             // Si l'utilisateur n'existe pas, on retourne null
             if (user == null)
@@ -43,5 +42,11 @@ namespace GitDemoToDoApp.Services
                 return Convert.ToBase64String(hashedBytes);
             }
         }
+
+        User? IUserService.Authenticate(string username, string password)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using GitDemoToDoApp.Services;
+﻿using GitDemoToDoApp.Models;
+using GitDemoToDoApp.Services;
 using GitDemoToDoApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,11 +21,11 @@ namespace GitDemoToDoApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(UserVM model)
+        public IActionResult Login(UserVM model)
         {
             if (ModelState.IsValid)
             {
-                var user = await _userService.Authenticate(model.Username, model.Password);
+                var user = _userService.Authenticate(model.Username, model.Password);
 
                 if (user != null)
                 {

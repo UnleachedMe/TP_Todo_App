@@ -24,19 +24,17 @@ namespace GitDemoToDoApp.Services
 
         public void CreateTodo(TodoItem todo)
         {
-            // Ici, tu pourrais ajouter de la logique métier avant de créer
             _todoRepository.Add(todo);
         }
 
-        public void UpdateTodo(TodoItem todo)
+        public bool UpdateTodo(TodoItem todo)
         {
-            // Ici aussi, tu pourrais ajouter de la logique métier
-            _todoRepository.Update(todo);
+            return _todoRepository.Update(todo);
         }
 
-        public void DeleteTodo(int id)
+        public bool DeleteTodo(int id)
         {
-            _todoRepository.Delete(id);
+            return _todoRepository.Delete(id);
         }
     }
 }

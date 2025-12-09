@@ -1,4 +1,6 @@
-﻿namespace GitDemoToDoApp.Models
+﻿using GitDemoToDoApp.Enums;
+
+namespace GitDemoToDoApp.Models
 {
     public class TodoItem
     {

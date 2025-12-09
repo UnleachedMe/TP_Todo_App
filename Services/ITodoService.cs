@@ -7,7 +7,7 @@ namespace GitDemoToDoApp.Services
         List<TodoItem> GetAllTodos();
         TodoItem GetTodoById(int id);
         void CreateTodo(TodoItem todo);
-        void UpdateTodo(TodoItem todo);
-        void DeleteTodo(int id);
+        bool UpdateTodo(TodoItem todo);
+        bool DeleteTodo(int id);
     }
 }
