@@ -1,3 +1,4 @@
+/* === STYLES DE BASE === */
 html {
     font-size: 14px;
 }
@@ -8,17 +9,18 @@ html {
     }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-    position: relative;
-    min-height: 100%;
-}
-
 body {
     margin-bottom: 60px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* === FOCUS STATES === */
+.btn:focus,
+.btn:active,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.25rem white, 0 0 0 0.25rem #258cfb !important;
 }
 
 /* === DARK MODE === */
@@ -27,7 +29,8 @@ body {
     color: #e5e5e5 !important;
 }
 
-    .dark-mode a,
+    /* --- Typographie et Liens --- */
+    .dark-mode,
     .dark-mode label,
     .dark-mode h1,
     .dark-mode h2,
@@ -35,42 +38,72 @@ body {
     .dark-mode h4,
     .dark-mode p,
     .dark-mode th,
-    .dark-mode td {
+    .dark-mode td,
+    .dark-mode a {
         color: #e5e5e5 !important;
     }
 
-    .dark-mode .table {
-        color: #e5e5e5 !important;
-    }
-
-        .dark-mode .table thead th {
-            color: #ffffff !important;
-            border-color: #333 !important;
+        .dark-mode a:hover {
+            color: #a0c4ff !important;
         }
 
-        .dark-mode .table tbody tr {
-            border-color: #333 !important;
+        /* --- Tableaux --- */
+        .dark-mode .table {
+            color: #e5e5e5 !important;
+            border-color: #495057 !important;
         }
 
-    .dark-mode .btn-primary {
-        background-color: #1f6feb !important;
-        border-color: #1f6feb !important;
-    }
+            .dark-mode .table thead th {
+                color: #ffffff !important;
+                border-color: #333333 !important;
+            }
 
-    .dark-mode .btn-secondary {
-        background-color: #444 !important;
-        border-color: #666 !important;
-    }
+            .dark-mode .table tbody tr {
+                border-color: #495057 !important;
+            }
 
-    .dark-mode input,
-    .dark-mode textarea,
-    .dark-mode select {
-        background-color: #1e1e1e !important;
-        color: #e5e5e5 !important;
-        border: 1px solid #444 !important;
-    }
+        /* --- Boutons --- */
+        .dark-mode .btn-primary {
+            background-color: #0d6efd !important;
+            border-color: #0d6efd !important;
+        }
 
-        .dark-mode input::placeholder,
-        .dark-mode textarea::placeholder {
-            color: #bbbbbb !important;
+        .dark-mode .btn-secondary {
+            background-color: #6c757d !important;
+            border-color: #6c757d !important;
+        }
+
+        .dark-mode .btn-success {
+            background-color: #198754 !important;
+            border-color: #198754 !important;
+        }
+
+        .dark-mode .btn-danger {
+            background-color: #dc3545 !important;
+            border-color: #dc3545 !important;
+        }
+
+        /* --- Formulaires --- */
+        .dark-mode .form-control,
+        .dark-mode .form-select,
+        .dark-mode textarea {
+            background-color: #212529 !important;
+            color: #e5e5e5 !important;
+            border: 1px solid #495057 !important;
+        }
+
+            .dark-mode .form-control::placeholder,
+            .dark-mode .form-select::placeholder,
+            .dark-mode textarea::placeholder {
+                color: #adb5bd !important;
+            }
+
+        /* --- Alertes --- */
+        .dark-mode .alert {
+            border-color: #495057 !important;
+        }
+
+        .dark-mode .alert-warning {
+            background-color: #664d03;
+            color: #ffc107;
         }

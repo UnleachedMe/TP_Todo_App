@@ -14,6 +14,6 @@ namespace GitDemoToDoApp.ViewModels
         public string? LastLogout { get; set; }
 
         // Vient du TodoService (base de données)
-        public IEnumerable<TodoItem> Todos { get; set; } = new List<TodoItem>();
+        public IEnumerable<TodoItemVM> Todos { get; set; } = new List<TodoItemVM>();
     }
 }

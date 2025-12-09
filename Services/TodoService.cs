@@ -12,7 +12,7 @@ namespace GitDemoToDoApp.Services
             _todoRepository = todoRepository;
         }
 
-        public List<TodoItem> GetAllTodos()
+        public IEnumerable<TodoItem> GetAllTodos()
         {
             return _todoRepository.GetAll();
         }

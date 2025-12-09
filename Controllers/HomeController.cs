@@ -1,4 +1,4 @@
-﻿using GitDemoToDoApp.Models;
+﻿using GitDemoToDoApp.Mappers;
 using GitDemoToDoApp.Services;
 using GitDemoToDoApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -22,12 +22,15 @@ namespace GitDemoToDoApp.Controllers
 
             var todos = _todoService.GetAllTodos();
 
+            // Utilise le mapper pour convertir la liste de TodoItem en liste de TodoItemVM
+            var todoViewModels = todos.ToViewModel();
+
             var model = new HomeVM
             {
                 Username = username,
                 Theme = Request.Cookies["Theme"] ?? "light",
                 LastLogout = TempData["LastLogout"]?.ToString() ?? "Jamais",
-                Todos = todos
+                Todos = todoViewModels
             };
 
             return View(model);
@@ -40,37 +43,48 @@ namespace GitDemoToDoApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(TodoItem todo)
+        public IActionResult Create(TodoItemVM vm)
         {
             if (ModelState.IsValid)
             {
-                _todoService.CreateTodo(todo);
+                // Utilise le mapper pour convertir le ViewModel en TodoItem (fonction magique)
+                var todoItem = vm.ToTodoItem();
+
+                _todoService.CreateTodo(todoItem);
                 return RedirectToAction(nameof(Index));
             }
-            return View(todo);
+
+            return View(vm);
         }
 
         public IActionResult Edit(int id)
         {
             var todo = _todoService.GetTodoById(id);
             if (todo == null) return NotFound();
-            return View(todo);
+
+            // Utilise le mapper pour convertir le TodoItem en EditTodoViewModel
+            var vm = todo.ToTodoItemViewModel();
+
+            return View(vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, TodoItem updatedTodo)
+        public IActionResult Edit(int id, TodoItemVM vm)
         {
-            if (id != updatedTodo.Id) return BadRequest();
+            if (id != vm.Id) return BadRequest();
 
             if (ModelState.IsValid)
             {
-                var success = _todoService.UpdateTodo(updatedTodo);
+                // Utilise le mapper pour convertir le ViewModel en TodoItem
+                var todoItem = vm.ToTodoItem();
+
+                var success = _todoService.UpdateTodo(todoItem);
                 if (!success) return NotFound();
 
                 return RedirectToAction(nameof(Index));
             }
-            return View(updatedTodo);
+            return View(vm);
         }
 
         public IActionResult Delete(int id)

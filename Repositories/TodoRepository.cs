@@ -28,7 +28,7 @@ namespace GitDemoToDoApp.Repositories
             _context.SaveChanges();
         }
 
-        public void Update(TodoItem item)
+        public bool Update(TodoItem item)
         {
             var todoFromDb = _context.TodoItems.FirstOrDefault(t => t.Id == item.Id);
             if (todoFromDb != null)
@@ -38,27 +38,24 @@ namespace GitDemoToDoApp.Repositories
                 todoFromDb.Status = item.Status;
                 todoFromDb.DueDate = item.DueDate;
                 _context.SaveChanges();
+                return true; // Succès
             }
+
+            return false;
         }
 
-        public void Delete(int id)
+        public bool Delete(int id)
         {
             var todoToDelete = _context.TodoItems.FirstOrDefault(t => t.Id == id);
             if (todoToDelete != null)
             {
                 _context.TodoItems.Remove(todoToDelete);
                 _context.SaveChanges();
+                return true; // Succès
             }
+
+            return false;
         }
 
-        bool ITodoRepository.Update(TodoItem item)
-        {
-            throw new NotImplementedException();
-        }
-
-        bool ITodoRepository.Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

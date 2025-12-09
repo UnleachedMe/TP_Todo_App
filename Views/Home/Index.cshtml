@@ -31,14 +31,14 @@
             <tbody>
                 @foreach (var todo in Model.Todos)
                 {
-                    var overdue = todo.DueDate < DateTime.Now && todo.Status != ToDoStatus.Completed;
+                    
                     <tr>
                         <td>
-                            @(todo.Status == ToDoStatus.Completed ? Html.Raw($"<s>{todo.Title}</s>") : todo.Title)
+                            @(todo.IsCompleted? Html.Raw($"<s>{todo.Title}</s>") : todo.Title)
                         </td>
                         <td>@todo.Description</td>
                         <td>@todo.Status</td>
-                        <td>@todo.DueDate.ToString("yyyy-MM-dd")</td>
+                        <td>@(todo.DueDate)</td>
                         <td>
                             <a asp-action="Edit" asp-route-id="@todo.Id">✏️</a>
                             <a asp-action="Delete" asp-route-id="@todo.Id" onclick="return confirm('Confirmer la suppression ?');">🗑️</a>

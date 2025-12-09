@@ -4,7 +4,7 @@ namespace GitDemoToDoApp.Services
 {
     public interface ITodoService
     {
-        List<TodoItem> GetAllTodos();
+        IEnumerable<TodoItem> GetAllTodos();
         TodoItem GetTodoById(int id);
         void CreateTodo(TodoItem todo);
         bool UpdateTodo(TodoItem todo);
